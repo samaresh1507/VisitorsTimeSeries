@@ -1,0 +1,59 @@
+---
+title: "VisitorsTSAnalysis"
+author: "Sandhya Amaresh"
+date: "July 20, 2016"
+output: 
+  html_document:
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+#### This is a R Markdown file to plot the TS for the Visitors dataset
+#### Plot the time series. Can you identify seasonal fluctuations and/or a trend?
+```{r}
+library(fpp)
+data("visitors")
+plot(visitors)
+```
+#### Use a classical decomposition to calculate the trend-cycle and seasonal indices. 
+#### Do the results support the graphical interpretation from part (a)? 
+```{r}
+fitd <- decompose(visitors)
+plot(fitd)
+```
+####Compute and plot the seasonally adjusted data.
+```{r}
+eeadj <- seasadj(fitd)
+plot(eeadj)
+```
+#### Change one observation to be an outlier (e.g., add 500 to one observation), and recompute the seasonally adjusted data. What is the effect of the outlier? 
+```{r}
+visitors2 <- ts(c(visitors[1:54],visitors[55]+200,visitors[56:240]),start=c(1985,5),frequency=12)
+plot(visitors2)
+fitd2 <- decompose(visitors2)
+eeadj2 <- seasadj(fitd2)
+plot(eeadj2)
+plot(eeadj)
+lines(eeadj2,type="l",col="red")
+```
+#### Does it make any difference if the outlier is near the end rather than in the middle of the time series? 
+```{r}
+visitors3 <- ts(c(visitors[1:239],visitors[240]+200),start=c(1985,5),frequency=12)
+fitd3 <- decompose(visitors3)
+eeadj3 <- seasadj(fitd3)
+plot(eeadj3)
+lines(eeadj2,type="l",col="red")
+```
+####Now use STL to decompose the series. 
+```{r}
+fit <- stl(visitors, s.window=5)
+plot(fit)
+plot(visitors, col="gray",
+      main="Visitors",
+      ylab="New Visitors", xlab="")
+lines(fit$time.series[,2],col="red",ylab="Trend")
+```
