@@ -19,12 +19,17 @@ library(fpp)
 data("visitors")
 plot(visitors)
 ```
+#### Observation - we see an upward trend in the visitors, with seasonsal fluctuations, so the visitors ####increases in summer months and dip in winter months
+
 #### Use a classical decomposition to calculate the trend-cycle and seasonal indices. 
 #### Do the results support the graphical interpretation from part (a)? 
 ```{r}
 fitd <- decompose(visitors)
 plot(fitd)
 ```
+#### Yes , we see and upward trend in the visitor count from 1985 to 2016
+
+
 ####Compute and plot the seasonally adjusted data.
 ```{r}
 eeadj <- seasadj(fitd)
@@ -48,6 +53,9 @@ eeadj3 <- seasadj(fitd3)
 plot(eeadj3)
 lines(eeadj2,type="l",col="red")
 ```
+####The outlier in the end is plotted in black and the outlier in middle is plotted in red, we see that there ####is not much difference, except there is an increase in the middle in the 1st scenario and increase in the 
+####end in the 2nd scenario
+
 ####Now use STL to decompose the series. 
 ```{r}
 fit <- stl(visitors, s.window=5)

@@ -89,6 +89,8 @@ plot(visitors)
 ```
 
 ![](VisitorTimeSeries_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
+#### Observation - we see an upward trend in the visitors, with seasonsal fluctuations, so the visitors ####increases in summer months and dip in winter months
+
 #### Use a classical decomposition to calculate the trend-cycle and seasonal indices. 
 #### Do the results support the graphical interpretation from part (a)? 
 
@@ -98,6 +100,9 @@ plot(fitd)
 ```
 
 ![](VisitorTimeSeries_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+#### Yes , we see and upward trend in the visitor count from 1985 to 2016
+
+
 ####Compute and plot the seasonally adjusted data.
 
 ```r
@@ -140,6 +145,9 @@ lines(eeadj2,type="l",col="red")
 ```
 
 ![](VisitorTimeSeries_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+####The outlier in the end is plotted in black and the outlier in middle is plotted in red, we see that there ####is not much difference, except there is an increase in the middle in the 1st scenario and increase in the 
+####end in the 2nd scenario
+
 ####Now use STL to decompose the series. 
 
 ```r
